@@ -7,5 +7,5 @@ export default yup.object().shape({
 
     size: yup.string()
     .oneOf(['1','2','3','4'])
-    .required("Please select a size")
+    .required("Please select a size"),
 })

@@ -36,61 +36,48 @@ export default function Forms(props){
         
         
         <form onSubmit ={onSubmit}>
-            <label> Name: 
-                <input onChange={onChange} value={formes.name} name='name' type='text' placeholder="Name for the order"/>
-            </label>
-            <select onChange={onChange} value={formes.size} name="size">Please select a size
+           <div><label> Name: <input onChange={onChange} value={formes.name} name='name' type='text' placeholder="Name for the order"/>
+            </label></div> 
+            <label>Please Select A Size: <select onChange={onChange} value={formes.size} name="size"> 
             <option value=''>Select</option>
             <option value='1'>Small</option>
             <option value='2'>Medium</option>
             <option vaule='3'>Large</option>
             <option value='4'>Extra Large</option>
             </select>
-           <label>Please Select Your Sauce</label>
+            </label>
+          <ul> <label>Please Select Your Sauce</label>
 
-           <input type="checkbox" name="orignial" onChange ={onChange} value={formes.original}/>
+          <li> <input type="checkbox" name="orignial" onChange ={onChange} value={formes.original}/> Original</li>
 
-           <input type="checkbox" name="BBQSauce" onChange ={onChange} value={formes.BBQSauce}/>
+           <li><input type="checkbox" name="BBQSauce" onChange ={onChange} value={formes.BBQSauce}/> BBQ Sauce</li>
 
-           <input type="checkbox" name ="garlicRanch" onChange ={onChange} value={formes.garlicRanch}/>
+           <li><input type="checkbox" name ="garlicRanch" onChange ={onChange} value={formes.garlicRanch}/> Garlic Ranch</li>
 
-           <input type="checkbox" name="spinachAlfredo"onChange ={onChange}  value={formes.spinachAlfredo}/>
+           <li><input type="checkbox" name="spinachAlfredo"onChange ={onChange}  value={formes.spinachAlfredo}/> Spinach Alfredo </li>
+</ul>
 
-           <label>Please Select Your Toppings</label>
+           <ul><label>Please Select Your Toppings</label>
+           <li><label> Pepperoni <input type='checkbox' onChange={onChange} value={formes.peperoni} name='peperoni'/></label></li>
+           <li><label> Sausage <input type='checkbox' onChange={onChange} value={formes.sausage} name='sausage'/></label></li>
+           <li><label> Canadian Bacon <input type='checkbox' onChange={onChange} value={formes.canadianBaccon} name='canadianBaccon'/></label></li>
+           <li><label> Spicy Italian Sausage <input type='checkbox' onChange={onChange} value={formes.spicyItalianSausage} name='spicyItalianSausage'/></label></li>
+           <li><label> Grilled Chicken <input type='checkbox' onChange={onChange} value={formes.girlledChicken} name='girlledChicken'/></label></li>
+           <li><label> Green Peppers <input type='checkbox' onChange={onChange} value={formes.greenPeppers} name='greenPeppers'/></label></li>
+           <li><label> Diced Tomatoes <input type='checkbox' onChange={onChange} value={formes.dicedTomatos} name='dicedTomatos'/></label></li>
+           <li><label> Black Olives <input type='checkbox' onChange={onChange} value={formes.blackOlives} name='blackOlives'/></label></li>
+           <li><label> Roasted Garlic <input type='checkbox' onChange={onChange} value={formes.roastedGarlic} name='roastedGarlic'/></label></li>
+           <li><label> Artichoke Hearts <input type='checkbox' onChange={onChange} value={formes.artichokeHearts} name='artichokeHearts'/></label></li>
+           <li><label> Three Cheese <input type='checkbox' onChange={onChange} value={formes.threeCheese} name='threeCheese'/></label></li>
+           <li><label> Pineapple <input type='checkbox' onChange={onChange} value={formes.pineapple} name='pineapple'/></label></li>
+           <li><label> Extra Cheese <input type='checkbox' onChange={onChange} value={formes.extraCheese} name='extraCheese'/></label></li>
 
-           <label>Pepperoni<input type='checkbox' onChange={onChange} value={formes.peperoni} name='peperoni'/></label>
-
-           <label>Sausage<input type='checkbox' onChange={onChange} value={formes.sausage} name='sausage'/></label>
-
-           <label>Canadian Bacon<input type='checkbox' onChange={onChange} value={formes.canadianBaccon} name='canadianBaccon'/></label>
-
-           <label>Spicy Italian Sausage<input type='checkbox' onChange={onChange} value={formes.spicyItalianSausage} name='spicyItalianSausage'/></label>
-
-           <label>Grilled Chicken<input type='checkbox' onChange={onChange} value={formes.girlledChicken} name='girlledChicken'/></label>
-
-           <label>Green Peppers<input type='checkbox' onChange={onChange} value={formes.greenPeppers} name='greenPeppers'/></label>
-
-           <label>Diced Tomatoes<input type='checkbox' onChange={onChange} value={formes.dicedTomatos} name='dicedTomatos'/></label>
-
-           <label>Black Olives<input type='checkbox' onChange={onChange} value={formes.blackOlives} name='blackOlives'/></label>
-
-           <label>Roasted Garlic<input type='checkbox' onChange={onChange} value={formes.roastedGarlic} name='roastedGarlic'/></label>
-
-           <label>Artichoke Hearts<input type='checkbox' onChange={onChange} value={formes.artichokeHearts} name='artichokeHearts'/></label>
-
-           <label>Three Cheese<input type='checkbox' onChange={onChange} value={formes.threeCheese} name='threeCheese'/></label>
-
-           <label>Pineapple<input type='checkbox' onChange={onChange} value={formes.pineapple} name='pineapple'/></label>
-
-           <label>Extra Cheese<input type='checkbox' onChange={onChange} value={formes.extraCheese} name='extraCheese'/></label>
-
-            <label>Any Special Instructions</label>
-
-            <input onChange={onChange} value={formes.instructionField} name="instructionField" type='text' placeholder="Special Instructions"/>
-            
+</ul>
+            <label>Any Special Instructions: <textarea onChange={onChange} value={formes.instructionField} name="instructionField" placeholder="Special Instructions:"/>
+            </label>
         </form> 
         </Container></div>
         // <Route path="/"><App/></Route>
-        // </Container>
+        
     )
 }

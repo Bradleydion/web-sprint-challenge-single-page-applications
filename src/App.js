@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Forms from "./Form"
 import * as yup from "yup"
 import schema from "./Schema"
@@ -12,25 +12,24 @@ const initialFormValues= {
   name:'',
   // dropdown window for Choice of Size
   size:'',
-  // radio buttons for Choice of Sauce
-  Original:'',
-  GarlicRanch:'',
-  BBQSauce:'',
-  SpinachAlfredo:'',
+  original:false,
+  garlicRanch:false,
+  BBQSauce:false,
+  spinachAlfredo:false,
   // checkbox for Add Toppings sub heading Choose Up To 10
-  Pepperoni:'',
-  Sausage:'',
-  CanadianBaccon:'',
-  SpicyItalianSausage:'',
-  GirlledChicken:'',
-  GreenPeppers:'',
-  DicedTomatos:'',
-  BlackOlives:'',
-  RoastedGarlic:'',
-  ArtichokeHearts:'',
-  ThreeCheese:'',
-  Pineapple:'',
-  ExtraCheese:'',
+  pepperoni:false,
+  sausage:false,
+  canadianBaccon:false,
+  spicyItalianSausage:false,
+  girlledChicken:false,
+  greenPeppers:false,
+  dicedTomatos:false,
+  blackOlives:false,
+  roastedGarlic:false,
+  artichokeHearts:false,
+  threeCheese:false,
+  pineapple:false,
+  extraCheese:false,
   // textfield input for Special Instructions place holder of "Anything else you'dlike to add?"
   instructionField:''
   // submit button
@@ -38,7 +37,6 @@ const initialFormValues= {
 const initalsFormErrors ={
   name:'',
   size:'',
-  instructionField:''
 }
 const initialOrdersArr = [];
 const intialDisabled = false;
@@ -113,7 +111,7 @@ const App = () => {
           <Row>
             <Col sm={{size: 'auto'}}><h1>Lambda Eats</h1> 
             </Col>
-            <Col sm={{size: 'auto'}}><Button color="primary">Home</Button></Col>
+            <Col sm={{size: 'auto'}}><Link to='/'><Button color="primary">Home</Button></Link></Col>
             <Col sm={{size: 'auto'}}><Button color="secondary">About</Button></Col>
           </Row>
       </Navbar>
@@ -128,6 +126,7 @@ const App = () => {
       </Card>
     </Container>
     <Route path="/pizza" render={(props)=>(<Forms{...props} submit={submit} change={change} formes={formes} setDisabled={setDisabled}/>)}/>
+    
     {/* <Route path="/pizza"><Forms/></Route> */}
     </div>
   );
