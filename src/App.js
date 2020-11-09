@@ -44,8 +44,8 @@ const initialOrdersArr = [];
 const intialDisabled = false;
 const App = () => {
   const[orders, setOrders] = useState (initialOrdersArr);
-  const [form, setForm] = useState(initialFormValues);
-  const {formErrors, setFormErrors}= useState(initalsFormErrors)
+  const [formes, setForm] = useState(initialFormValues);
+  const [formErrors, setFormErrors]= useState(initalsFormErrors)
   const [disabled, setDisabled]= useState(intialDisabled)
   const postNewOrder = (newOrder) => {
     axios
@@ -76,40 +76,36 @@ const App = () => {
       })
     })
     setForm({
-      ...form,
+      ...formes,
       [name]:value,
     })
   }
   const submit = () => {
     const newOrder = {
-      name: form.name.trim(),
-      size: form.size.trim(),
-      original : form.original,
-      BBQSauce: form.BBQSauce,
-      garlicRanch:form.garlicRanch,
-      spinachAlfredo:form.spinachAlfredo,
-      pepperoni:form.pepperoni,
-      sausage:form.sausage,
-      canadianBaccon:form.canadianBaccon,
-      spicyItalianSausage:form.spicyItalianSausage,
-      girlledChicken:form.girlledChicken,
-      greenPeppers:form.greenPeppers,
-      dicedTomatos:form.dicedTomatos,
-      blackOlives:form.blackOlives,
-      roastedGarlic:form.roastedGarlic,
-      artichokeHearts:form.artichokeHearts,
-      threeCheese:form.threeCheese,
-      pineapple:form.pineapple,
-      extraCheese:form.extraCheese,
-      instructionField: form.instructionField.trim()
+      name: formes.name.trim(),
+      size: formes.size.trim(),
+      original : formes.original,
+      BBQSauce: formes.BBQSauce,
+      garlicRanch:formes.garlicRanch,
+      spinachAlfredo:formes.spinachAlfredo,
+      pepperoni:formes.pepperoni,
+      sausage:formes.sausage,
+      canadianBaccon:formes.canadianBaccon,
+      spicyItalianSausage:formes.spicyItalianSausage,
+      girlledChicken:formes.girlledChicken,
+      greenPeppers:formes.greenPeppers,
+      dicedTomatos:formes.dicedTomatos,
+      blackOlives:formes.blackOlives,
+      roastedGarlic:formes.roastedGarlic,
+      artichokeHearts:formes.artichokeHearts,
+      threeCheese:formes.threeCheese,
+      pineapple:formes.pineapple,
+      extraCheese:formes.extraCheese,
+      instructionField: formes.instructionField.trim()
     }
     postNewOrder(newOrder)
   }
-  useEffect(()=>{
-    schema.isValid(form).then((valid)=>{
-      setDisabled(!valid);
-    })
-  },[form])
+ 
   return (
   <div>
     <Container>
@@ -131,7 +127,8 @@ const App = () => {
         </CardImgOverlay>
       </Card>
     </Container>
-    <Route path="/pizza" render={(props)=>(<Forms{...props} submit={submit} change={change} form={form} disabled={disabled}/>)}/>
+    <Route path="/pizza" render={(props)=>(<Forms{...props} submit={submit} change={change} formes={formes} setDisabled={setDisabled}/>)}/>
+    {/* <Route path="/pizza"><Forms/></Route> */}
     </div>
   );
 };

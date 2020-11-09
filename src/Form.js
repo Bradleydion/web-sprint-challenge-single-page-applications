@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Navbar, Button, Container, Row, Col} from "reactstrap";
 import {Route,Link} from "react-router-dom"
 import App from "./App"
+import schema from "./Schema"
 
 export default function Forms(props){
-    const{submit, change, form, disabled}=props
+    
+    const{submit, change, formes, setDisabled}=props
     const onSubmit = evt =>{
         evt.preventDefault();
         submit();
@@ -14,9 +16,15 @@ export default function Forms(props){
         const vToUse = type === 'checkbox'? checked : value;
         change (name,vToUse)
     }
-    console.log (form)
+
+    useEffect(()=>{
+        schema.isValid(formes).then((valid)=>{
+          setDisabled(!valid);
+        })
+      },[onChange])
+    console.log (props)
     return(
-        <Container>
+        <div><Container>
         <Navbar>
             <Row>
               <Col sm={{size: 'auto'}}><h1>Lambda Eats</h1> 
@@ -25,11 +33,13 @@ export default function Forms(props){
               <Col sm={{size: 'auto'}}><Button color="secondary">About</Button></Col>
             </Row>
         </Navbar>
+        
+        
         <form onSubmit ={onSubmit}>
             <label> Name: 
-                <input onChange={onChange} value={form.name} name='name' type='text' placeholder="Name for the order"/>
+                <input onChange={onChange} value={formes.name} name='name' type='text' placeholder="Name for the order"/>
             </label>
-            <select onChange={onChange} value={form.size} name="size">Please select a size
+            <select onChange={onChange} value={formes.size} name="size">Please select a size
             <option value=''>Select</option>
             <option value='1'>Small</option>
             <option value='2'>Medium</option>
@@ -38,48 +48,49 @@ export default function Forms(props){
             </select>
            <label>Please Select Your Sauce</label>
 
-           <input type="radio" name="orignial" value="original">Original</input>
+           <input type="checkbox" name="orignial" onChange ={onChange} value={formes.original}/>
 
-           <input type="radio" name="BBQSauce" value="BBQSauce">BBQ Sauce</input>
+           <input type="checkbox" name="BBQSauce" onChange ={onChange} value={formes.BBQSauce}/>
 
-           <input type="radio" name ="garlicRanch" value="garlicRanch">Garlic Ranch</input>
+           <input type="checkbox" name ="garlicRanch" onChange ={onChange} value={formes.garlicRanch}/>
 
-           <input type="radio" name="spinachAlfredo" value="spinachAlfredo">Spinach Alfredo</input>
+           <input type="checkbox" name="spinachAlfredo"onChange ={onChange}  value={formes.spinachAlfredo}/>
 
            <label>Please Select Your Toppings</label>
 
-           <label>Pepperoni<input type='checkbox' onChange={onChange} value={form.peperoni} name='peperoni'/></label>
+           <label>Pepperoni<input type='checkbox' onChange={onChange} value={formes.peperoni} name='peperoni'/></label>
 
-           <label>Sausage<input type='checkbox' onChange={onChange} value={form.sausage} name='sausage'/></label>
+           <label>Sausage<input type='checkbox' onChange={onChange} value={formes.sausage} name='sausage'/></label>
 
-           <label>Canadian Bacon<input type='checkbox' onChange={onChange} value={form.canadianBaccon} name='canadianBaccon'/></label>
+           <label>Canadian Bacon<input type='checkbox' onChange={onChange} value={formes.canadianBaccon} name='canadianBaccon'/></label>
 
-           <label>Spicy Italian Sausage<input type='checkbox' onChange={onChange} value={form.spicyItalianSausage} name='spicyItalianSausage'/></label>
+           <label>Spicy Italian Sausage<input type='checkbox' onChange={onChange} value={formes.spicyItalianSausage} name='spicyItalianSausage'/></label>
 
-           <label>Grilled Chicken<input type='checkbox' onChange={onChange} value={form.girlledChicken} name='girlledChicken'/></label>
+           <label>Grilled Chicken<input type='checkbox' onChange={onChange} value={formes.girlledChicken} name='girlledChicken'/></label>
 
-           <label>Green Peppers<input type='checkbox' onChange={onChange} value={form.greenPeppers} name='greenPeppers'/></label>
+           <label>Green Peppers<input type='checkbox' onChange={onChange} value={formes.greenPeppers} name='greenPeppers'/></label>
 
-           <label>Diced Tomatoes<input type='checkbox' onChange={onChange} value={form.dicedTomatos} name='dicedTomatos'/></label>
+           <label>Diced Tomatoes<input type='checkbox' onChange={onChange} value={formes.dicedTomatos} name='dicedTomatos'/></label>
 
-           <label>Black Olives<input type='checkbox' onChange={onChange} value={form.blackOlives} name='blackOlives'/></label>
+           <label>Black Olives<input type='checkbox' onChange={onChange} value={formes.blackOlives} name='blackOlives'/></label>
 
-           <label>Roasted Garlic<input type='checkbox' onChange={onChange} value={form.roastedGarlic} name='roastedGarlic'/></label>
+           <label>Roasted Garlic<input type='checkbox' onChange={onChange} value={formes.roastedGarlic} name='roastedGarlic'/></label>
 
-           <label>Artichoke Hearts<input type='checkbox' onChange={onChange} value={form.artichokeHearts} name='artichokeHearts'/></label>
+           <label>Artichoke Hearts<input type='checkbox' onChange={onChange} value={formes.artichokeHearts} name='artichokeHearts'/></label>
 
-           <label>Three Cheese<input type='checkbox' onChange={onChange} value={form.threeCheese} name='threeCheese'/></label>
+           <label>Three Cheese<input type='checkbox' onChange={onChange} value={formes.threeCheese} name='threeCheese'/></label>
 
-           <label>Pineapple<input type='checkbox' onChange={onChange} value={form.pineapple} name='pineapple'/></label>
+           <label>Pineapple<input type='checkbox' onChange={onChange} value={formes.pineapple} name='pineapple'/></label>
 
-           <label>Extra Cheese<input type='checkbox' onChange={onChange} value={form.extraCheese} name='extraCheese'/></label>
+           <label>Extra Cheese<input type='checkbox' onChange={onChange} value={formes.extraCheese} name='extraCheese'/></label>
 
             <label>Any Special Instructions</label>
 
-            <input onChange={onChange} value={form.instructionField} name="instructionField" type='text' placeholder="Special Instructions"/>
+            <input onChange={onChange} value={formes.instructionField} name="instructionField" type='text' placeholder="Special Instructions"/>
             
-        </form>
-        <Route path="/"><App/></Route>
-        </Container>
+        </form> 
+        </Container></div>
+        // <Route path="/"><App/></Route>
+        // </Container>
     )
 }
