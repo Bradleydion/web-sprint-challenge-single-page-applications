@@ -6,14 +6,16 @@ import schema from "./Schema"
 
 export default function Forms(props){
     
-    const{submit, change, formes, setDisabled}=props
+    const{submit, change, formes, setDisabled, formErrors,setForm,initialFormValues}=props
     const onSubmit = evt =>{
         evt.preventDefault();
         submit();
+        setForm(initialFormValues)
     }
     const onChange = evt => {
         const {name, value, type, checked} = evt.target;
         const vToUse = type === 'checkbox'? checked : value;
+        evt.persist();
         change (name,vToUse)
     }
 
@@ -21,34 +23,28 @@ export default function Forms(props){
         schema.isValid(formes).then((valid)=>{
           setDisabled(!valid);
         })
-      },[onChange])
+      },[formes])
     console.log (props)
     return(
         <div><Container>
-        <Navbar>
-            <Row>
-              <Col sm={{size: 'auto'}}><h1>Lambda Eats</h1> 
-              </Col>
-              <Col sm={{size: 'auto'}}><Link to='/'><Button color="primary">Home</Button></Link></Col>
-              <Col sm={{size: 'auto'}}><Button color="secondary">About</Button></Col>
-            </Row>
-        </Navbar>
         
         
         <form onSubmit ={onSubmit}>
            <div><label> Name: <input onChange={onChange} value={formes.name} name='name' type='text' placeholder="Name for the order"/>
             </label></div> 
+            {formErrors.name?<p>{formErrors.name}</p>:null}
             <label>Please Select A Size: <select onChange={onChange} value={formes.size} name="size"> 
             <option value=''>Select</option>
             <option value='1'>Small</option>
             <option value='2'>Medium</option>
-            <option vaule='3'>Large</option>
+            <option value='3'>Large</option>
             <option value='4'>Extra Large</option>
             </select>
+            {formErrors.size?<p>{formErrors.size}</p>:null}
             </label>
           <ul> <label>Please Select Your Sauce</label>
 
-          <li> <input type="checkbox" name="orignial" onChange ={onChange} value={formes.original}/> Original</li>
+          <li> <input type="checkbox" name="original" onChange ={onChange} value={formes.original}/> Original</li>
 
            <li><input type="checkbox" name="BBQSauce" onChange ={onChange} value={formes.BBQSauce}/> BBQ Sauce</li>
 
@@ -58,7 +54,7 @@ export default function Forms(props){
 </ul>
 
            <ul><label>Please Select Your Toppings</label>
-           <li><label> Pepperoni <input type='checkbox' onChange={onChange} value={formes.peperoni} name='peperoni'/></label></li>
+           <li><label> Pepperoni <input type='checkbox' onChange={onChange} value={formes.pepperoni} name='pepperoni'/></label></li>
            <li><label> Sausage <input type='checkbox' onChange={onChange} value={formes.sausage} name='sausage'/></label></li>
            <li><label> Canadian Bacon <input type='checkbox' onChange={onChange} value={formes.canadianBaccon} name='canadianBaccon'/></label></li>
            <li><label> Spicy Italian Sausage <input type='checkbox' onChange={onChange} value={formes.spicyItalianSausage} name='spicyItalianSausage'/></label></li>
@@ -74,8 +70,9 @@ export default function Forms(props){
 
 </ul>
             <label>Any Special Instructions: <textarea onChange={onChange} value={formes.instructionField} name="instructionField" placeholder="Special Instructions:"/>
-            </label>
+            </label> <Button id="submit" type="submit" color="primary">Submit</Button>
         </form> 
+        
         </Container></div>
         // <Route path="/"><App/></Route>
         

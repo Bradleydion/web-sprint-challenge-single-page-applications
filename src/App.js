@@ -12,24 +12,24 @@ const initialFormValues= {
   name:'',
   // dropdown window for Choice of Size
   size:'',
-  original:false,
-  garlicRanch:false,
-  BBQSauce:false,
-  spinachAlfredo:false,
+  original:'',
+  garlicRanch:'',
+  BBQSauce:'',
+  spinachAlfredo:'',
   // checkbox for Add Toppings sub heading Choose Up To 10
-  pepperoni:false,
-  sausage:false,
-  canadianBaccon:false,
-  spicyItalianSausage:false,
-  girlledChicken:false,
-  greenPeppers:false,
-  dicedTomatos:false,
-  blackOlives:false,
-  roastedGarlic:false,
-  artichokeHearts:false,
-  threeCheese:false,
-  pineapple:false,
-  extraCheese:false,
+  pepperoni:'',
+  sausage:'',
+  canadianBaccon:'',
+  spicyItalianSausage:'',
+  girlledChicken:'',
+  greenPeppers:'',
+  dicedTomatos:'',
+  blackOlives:'',
+  roastedGarlic:'',
+  artichokeHearts:'',
+  threeCheese:'',
+  pineapple:'',
+  extraCheese:'',
   // textfield input for Special Instructions place holder of "Anything else you'dlike to add?"
   instructionField:''
   // submit button
@@ -47,7 +47,7 @@ const App = () => {
   const [disabled, setDisabled]= useState(intialDisabled)
   const postNewOrder = (newOrder) => {
     axios
-    .post("https://reques.in/api/users", newOrder)
+    .post("https://reqres.in/api/users", newOrder)
     .then((res)=> {
       console.log (res)
       setOrders ([...orders,res.data]);
@@ -125,8 +125,7 @@ const App = () => {
         </CardImgOverlay>
       </Card>
     </Container>
-    <Route path="/pizza" render={(props)=>(<Forms{...props} submit={submit} change={change} formes={formes} setDisabled={setDisabled}/>)}/>
-    
+    <Route path="/pizza" render={(props)=>(<Forms{...props} submit={submit} change={change} formes={formes} setDisabled={setDisabled} formErrors={formErrors} setForm={setForm} initialFormValues={initialFormValues}/>)}/>
     {/* <Route path="/pizza"><Forms/></Route> */}
     </div>
   );
